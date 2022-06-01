@@ -7,32 +7,25 @@ from adafruit_display_shapes.rect import Rect
 from adafruit_display_text import label
 from adafruit_macropad import MacroPad
 
-# CONFIGURABLES ------------------------
-
 MACRO_FOLDER = "/macros"
 
-# CLASSES AND FUNCTIONS ----------------
 
 class App:
-    """Class representing a host-side application, for which we have a set
-    of macro sequences. Project code was originally more complex and
-    this was helpful, but maybe it's excessive now?"""
-
     def __init__(self, appdata):
         self.name = appdata["name"]
         self.macros = appdata["macros"]
 
     def switch(self):
-        """Activate application settings; update OLED labels and LED
-        colors."""
-        group[13].text = self.name  # Application name
+        group[13].text = self.name
+
         for i in range(12):
-            if i < len(self.macros):  # Key in use, set label + LED color
+            if i < len(self.macros):
                 macropad.pixels[i] = self.macros[i][0]
                 group[i].text = self.macros[i][1]
-            else:  # Key not in use, no label or LED
+            else:
                 macropad.pixels[i] = 0
                 group[i].text = ""
+
         macropad.keyboard.release_all()
         macropad.consumer_control.release()
         macropad.mouse.release_all()
@@ -57,7 +50,10 @@ for key_index in range(12):
             terminalio.FONT,
             text="",
             color=0xFFFFFF,
-            anchored_position=((macropad.display.width - 1) * x / 2, macropad.display.height - 1 - (3 - y) * 12),
+            anchored_position=(
+                (macropad.display.width - 1) * x / 2,
+                macropad.display.height - 1 - (3 - y) * 12,
+            ),
             anchor_point=(x / 2, 1.0),
         )
     )
@@ -82,7 +78,15 @@ for filename in files:
         try:
             module = __import__(MACRO_FOLDER + "/" + filename[:-3])
             apps.append(App(module.app))
-        except (SyntaxError, ImportError, AttributeError, KeyError, NameError, IndexError, TypeError) as err:
+        except (
+            SyntaxError,
+            ImportError,
+            AttributeError,
+            KeyError,
+            NameError,
+            IndexError,
+            TypeError,
+        ) as err:
             print("ERROR in", filename)
             import traceback
 
@@ -115,6 +119,7 @@ while True:
     # the keypad keys, as if it were a 13th key/macro.
     macropad.encoder_switch_debounced.update()
     encoder_switch = macropad.encoder_switch_debounced.pressed
+
     if encoder_switch != last_encoder_switch:
         last_encoder_switch = encoder_switch
         if len(apps[app_index].macros) < 13:
@@ -133,6 +138,7 @@ while True:
     # are avoided by 'continue' statements above which resume the loop.
 
     sequence = apps[app_index].macros[key_number][2]
+
     if pressed:
         # 'sequence' is an arbitrary-length list, each item is one of:
         # Positive integer (e.g. Keycode.KEYPAD_MINUS): key pressed
