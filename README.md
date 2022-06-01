@@ -1,3 +1,3 @@
-# RP2040 MacroPad
+# 👋 RP2040 MacroPad Hotkeys
 
-Macros and general infrastructure for my RP2040 MacroPad using CircuitPython.
+Personal macros and general infrastructure for the RP2040 MacroPad using CircuitPython.
