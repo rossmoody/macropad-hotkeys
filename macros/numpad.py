@@ -1,8 +1,8 @@
 from adafruit_hid.keycode import Keycode  # REQUIRED if using Keycode.* values
 
-app = {  # REQUIRED dict, must be named 'app'
-    "name": "Numpad",  # Application name
-    "macros": [  # List of button macros...
+config = { 
+    "name": "Numpad",  
+    "macros": [  
         # COLOR    LABEL    KEY SEQUENCE
         # 1st row ----------
         (0x202000, "7", ["7"]),

@@ -1,4 +1,4 @@
-app = {
+config = {
     "name": "Tones",
     "macros": [
         # 1st row ----------

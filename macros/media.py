@@ -1,6 +1,6 @@
 from adafruit_hid.consumer_control_code import ConsumerControlCode
 
-app = {
+config = {
     "name": "Media",
     "macros": [
         # COLOR    LABEL    KEY SEQUENCE

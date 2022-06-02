@@ -1,6 +1,6 @@
 from adafruit_hid.keycode import Keycode
 
-app = {
+config = {
     "name": "Mac Safari",
     "macros": [  # List of button macros...
         # COLOR    LABEL    KEY SEQUENCE
