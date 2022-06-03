@@ -3,9 +3,9 @@ import os
 import displayio
 from adafruit_macropad import MacroPad
 
-from config import Config
-from init import init
-from setup_display import setup_display
+from setup.config import Config
+from setup.init import init
+from setup.setup_display import setup_display
 
 # INITIALIZATION -----------------------
 
