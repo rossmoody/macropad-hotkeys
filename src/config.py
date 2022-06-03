@@ -1,9 +1,9 @@
-class App:
-    def __init__(self, appdata):
-        self.name = appdata["name"]
-        self.macros = appdata["macros"]
+class Config:
+    def __init__(self, config):
+        self.name = config["name"]
+        self.macros = config["macros"]
 
-    def switch(self, group, macropad):
+    def change(self, group, macropad):
         group[13].text = self.name
 
         for i in range(12):

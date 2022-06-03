@@ -3,8 +3,8 @@ import os
 import displayio
 from adafruit_macropad import MacroPad
 
+from config import Config
 from init import init
-from macro import Macro
 from setup_display import setup_display
 
 # INITIALIZATION -----------------------
@@ -18,11 +18,14 @@ setup_display(macropad, group)
 
 # LOAD MACROS ----------------------------
 
-macros = []
+configs = []
+
 for filename in os.listdir("/macros/"):
     module = __import__("/macros/" + filename[:-3])
-    macros.append(Macro(module.config))
+    configs.append(Config(module.config))
+
+configs[0].change(group, macropad)
 
 # MAIN LOOP ----------------------------
 
-init(macropad, macros, group)
+init(macropad, configs, group)
